@@ -1,8 +1,8 @@
-import { BigNumberish } from '@ethersproject/bignumber';
+import { BigNumber } from '@ethersproject/bignumber';
 import { formatUnits } from '@ethersproject/units';
 import { keccak256 } from '@ethersproject/keccak256';
 import { toUtf8Bytes } from '@ethersproject/strings';
-import { Multicaller } from '../../utils';
+import { multicall } from '../../utils';
 
 export const author = 'cjhare';
 export const version = '0.1.0';
@@ -32,7 +32,7 @@ export async function strategy(
   const role = keccak256(toUtf8Bytes(options.role));
 
   //TODO remove - if/when new block works
-
+/*
   const multi = new Multicaller(network, provider, abi, { blockTag });
   addresses.forEach((address) =>
     multi.call(address, options.address, 'getVotes', [address, role])
@@ -46,15 +46,18 @@ export async function strategy(
       parseFloat(formatUnits(balance, options.decimals))
     ])
   );
+*/
 
-/*
 //TODO the abi isn't making it through - the 'getVotes' is lost
 
   const response: BigNumber[] = await multicall(
     network,
     provider,
     abi,
-    addresses.map((address: any) => [[address.toLowerCase(), role]]),
+    addresses.map((address: any) => [
+      'getVotes',
+      [address.toLowerCase(), role]
+    ]),
     { blockTag }
   );
   return Object.fromEntries(
@@ -62,7 +65,7 @@ export async function strategy(
       addresses[i],
       parseFloat(formatUnits(value.toString(), options.decimals))
     ])
-  );*/
+  );
 }
 
 async function validatePresence(parameter: any, reason: string): Promise<void> {
