@@ -55,6 +55,7 @@ export async function strategy(
     provider,
     abi,
     addresses.map((address: any) => [
+      options.address,
       'getVotes',
       [address.toLowerCase(), role]
     ]),
