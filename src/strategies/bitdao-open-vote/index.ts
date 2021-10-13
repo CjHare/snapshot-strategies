@@ -1,6 +1,6 @@
-import { BigNumberish } from '@ethersproject/bignumber';
+import { BigNumber } from '@ethersproject/bignumber';
 import { formatUnits } from '@ethersproject/units';
-import { Multicaller } from '../../utils';
+import { multicall } from '../../utils';
 
 export const author = 'cjhare';
 export const version = '0.1.0';
@@ -26,30 +26,13 @@ export async function strategy(
     'Decimal is required in the options'
   );
 
-  //TODO remove - if/when new block works
-
-  const multi = new Multicaller(network, provider, abi, { blockTag });
-  addresses.forEach((address) =>
-    multi.call(address, options.address, 'getVotes', [address])
-  );
-
-  const result: Record<string, BigNumberish> = await multi.execute();
-
-  return Object.fromEntries(
-    Object.entries(result).map(([address, balance]) => [
-      address,
-      parseFloat(formatUnits(balance, options.decimals))
-    ])
-  );
-
-/*
-//TODO the abi isn't making it through - the 'getVotes' is lost
-
   const response: BigNumber[] = await multicall(
     network,
     provider,
     abi,
-    addresses.map((address: any) => [[address.toLowerCase(), role]]),
+    addresses.map((address: any) => [
+      options.address,
+      'getVotes',[address.toLowerCase()]]),
     { blockTag }
   );
   return Object.fromEntries(
@@ -57,7 +40,7 @@ export async function strategy(
       addresses[i],
       parseFloat(formatUnits(value.toString(), options.decimals))
     ])
-  );*/
+  );
 }
 
 async function validatePresence(parameter: any, reason: string): Promise<void> {

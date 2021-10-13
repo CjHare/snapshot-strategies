@@ -31,25 +31,6 @@ export async function strategy(
 
   const role = keccak256(toUtf8Bytes(options.role));
 
-  //TODO remove - if/when new block works
-/*
-  const multi = new Multicaller(network, provider, abi, { blockTag });
-  addresses.forEach((address) =>
-    multi.call(address, options.address, 'getVotes', [address, role])
-  );
-
-  const result: Record<string, BigNumberish> = await multi.execute();
-
-  return Object.fromEntries(
-    Object.entries(result).map(([address, balance]) => [
-      address,
-      parseFloat(formatUnits(balance, options.decimals))
-    ])
-  );
-*/
-
-//TODO the abi isn't making it through - the 'getVotes' is lost
-
   const response: BigNumber[] = await multicall(
     network,
     provider,
