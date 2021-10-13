@@ -5,7 +5,7 @@ import * as balancer from './balancer';
 import * as balancerErc20InternalBalanceOf from './balancer-erc20-internal-balance-of';
 import * as sunder from './sunder';
 import * as balancerSmartPool from './balancer-smart-pool';
-import * as bitdaoVoteByRole from './bitdao-vote-by-role';
+import * as bitdaoRoleVoting from './bitdao-role-voting';
 import * as contractCall from './contract-call';
 import * as dextfVaults from './dextf-staked-in-vaults';
 import * as dfynFarms from './dfyn-staked-in-farms';
@@ -179,7 +179,7 @@ const strategies = {
   'balancer-smart-pool': balancerSmartPool,
   'balancer-erc20-internal-balance-of': balancerErc20InternalBalanceOf,
   'balance-in-vdfyn-vault': vDfynVault,
-  'bitdao-vote-by-role': bitdaoVoteByRole,
+  'bitdao-role-voting': bitdaoRoleVoting,
   'erc20-received': erc20Received,
   'contract-call': contractCall,
   'dextf-staked-in-vaults': dextfVaults,

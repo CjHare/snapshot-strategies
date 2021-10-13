@@ -48,6 +48,8 @@ export async function strategy(
   );
 
 /*
+//TODO the abi isn't making it through - the 'getVotes' is lost
+
   const response: BigNumber[] = await multicall(
     network,
     provider,
