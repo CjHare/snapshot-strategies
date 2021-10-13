@@ -1,8 +1,6 @@
 import { BigNumberish } from '@ethersproject/bignumber';
 import { formatUnits } from '@ethersproject/units';
-import { keccak256 } from '@ethersproject/keccak256';
-import { toUtf8Bytes } from '@ethersproject/strings';
-import { Multicaller } from "../../utils";
+import { Multicaller } from '../../utils';
 
 export const author = 'cjhare';
 export const version = '0.1.0';
